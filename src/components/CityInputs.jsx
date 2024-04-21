@@ -6,25 +6,22 @@ const CityInput = ({ makeApiCall }) => {
   const [loading, setLoading] = useState(false);
   const [placeholder, setPlaceholder] = useState("Enter a City...");
 
-  const onKeyPressHandler = (e) => {
-    const keyPressHandler = async () => {
-      const eventKey = e.which ? e.which : e.keyCode;
-      if (eventKey === 13) {
-        if (/^[a-zA-ZäöüÄÖÜß ]+$/.test(city)) {
-          setLoading(true);
-          if (await makeApiCall(city)) {
-            setPlaceholder("Enter a City...");
-          } else {
-            setPlaceholder("City was not found, try again...");
-          }
+  const onKeyPressHandler = async (e) => {
+    const eventKey = e.which ? e.which : e.keyCode;
+    if (eventKey === 13) {
+      if (/^[a-zA-ZäöüÄÖÜß ]+$/.test(city)) {
+        setLoading(true);
+        if (await makeApiCall(city)) {
+          setPlaceholder("Enter a City...");
         } else {
-          setPlaceholder("Please enter a valid city name...");
+          setPlaceholder("City was not found, try again...");
         }
-        setLoading(false);
-        setCity("");
+      } else {
+        setPlaceholder("Please enter a valid city name...");
       }
-    };
-    keyPressHandler();
+      setLoading(false);
+      setCity("");
+    }
   };
 
   const style = {
@@ -39,13 +36,14 @@ const CityInput = ({ makeApiCall }) => {
     fontSize: "20px",
     transition: "all 0.5s ease-out",
   };
+
   return (
     <input
       className="city-input"
       style={style}
       type="text"
       placeholder={placeholder}
-      onPress={onKeyPressHandler}
+      onKeyPress={onKeyPressHandler}
       value={city}
       onChange={(e) => setCity(e.target.value)}
     />

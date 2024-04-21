@@ -1,6 +1,5 @@
-import React from "react";
-import { useState } from "react";
-import { useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import { fetchWeatherApi } from "openmeteo";
 import "./App.css";
 import MainWeatherWindow from "./components/MainWeatherWindow";
 import CityInput from "./components/CityInputs";
@@ -9,6 +8,7 @@ import WeatherBox from "./components/WeatherBox";
 const App = () => {
   const [city, setCity] = useState(undefined);
   const [days, setDays] = useState(new Array(5));
+  const [weatherBoxElements, setWeatherBoxElements] = useState([]);
 
   const updateState = (data) => {
     const city = data.city.name;
@@ -24,19 +24,37 @@ const App = () => {
     }
     setCity(city);
     setDays(days);
+    const WeatherBoxes = days.slice(1).map((day, index) => (
+      <li key={index}>
+        <WeatherBox {...day} />
+      </li>
+    ));
+    setWeatherBoxElements(WeatherBoxes);
   };
 
-  const makeApiCall = (city) => {
-    const apiCaller = async () => {
-      const api_data = await fetch("(link unavalable)").then((resp) =>
-        resp.json()
-      );
-      if (api_data.cod === "200") {
-        await updateState(api_data);
-        return true;
-      } else return false;
-    };
-    apiCaller();
+  const makeApiCall = async (city) => {
+    try {
+      const apiKey = "2ee51bd454766d1a7224c6c17b161546";
+      const endpoint = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`;
+
+      const response = await fetch(`${endpoint}&query=${city}`);
+      console.log(city);
+      if (!response.ok) {
+        throw new Error("Failed to fetch data");
+      }
+      const api_data = await response.json();
+      console.log(api_data);
+      updateState(api_data);
+      // if (api_data.code === 200) {
+      //   updateState(api_data);
+      //   return true;
+      // } else {
+      //   return false;
+      // }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      return false;
+    }
   };
 
   const getDayIndices = (data) => {
@@ -58,19 +76,20 @@ const App = () => {
   };
 
   useEffect(() => {
-    const WeatherBoxes = days.slice(1).map((day) => (
-      <li>
+    const WeatherBoxes = days.slice(1).map((day, index) => (
+      <li key={index}>
         <WeatherBox {...day} />
       </li>
     ));
-    return <ul className="weather-box-list">{weatherBoxes}</ul>;
-  });
+    setWeatherBoxElements(WeatherBoxes);
+  }, [days]);
+
   return (
     <div className="App">
       <header className="App-header">
         <MainWeatherWindow data={days[0]} city={city}>
-          <CityInput city={city} makeApiCall={makeApiCall.bind(this)} />
-          <WeatherBoxes />
+          <CityInput city={city} makeApiCall={makeApiCall} />
+          <ul className="weather-box-list">{weatherBoxElements}</ul>
         </MainWeatherWindow>
       </header>
     </div>
