@@ -37,23 +37,17 @@ const App = () => {
       const apiKey = "2ee51bd454766d1a7224c6c17b161546";
       const endpoint = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`;
 
-      const response = await fetch(`${endpoint}&query=${city}`);
-      console.log(city);
+      const response = await fetch(endpoint);
       if (!response.ok) {
         throw new Error("Failed to fetch data");
       }
-      const api_data = await response.json();
-      console.log(api_data);
-      updateState(api_data);
-      // if (api_data.code === 200) {
-      //   updateState(api_data);
-      //   return true;
-      // } else {
-      //   return false;
-      // }
+      const apiData = await response.json();
+      console.log(apiData);
+      updateState(apiData); // Assuming updateState is defined and updates the component state
+      return true; // Return true to indicate successful API call
     } catch (error) {
       console.error("Error fetching data:", error);
-      return false;
+      return false; // Return false to indicate failed API call
     }
   };
 

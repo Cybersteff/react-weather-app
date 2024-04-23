@@ -1,6 +1,7 @@
 import React from "react";
 import "./MainWeatherWindow.css";
 import defaultIcon from "../images/01d.svg"; // Import default icon
+import { IMAGES } from "../images/image";
 
 const MainWeatherWindow = ({ city, data, children }) => {
   const Title = !city ? <h1 className="title">Weather Forecast</h1> : null;
@@ -9,14 +10,7 @@ const MainWeatherWindow = ({ city, data, children }) => {
     <div className="main">
       <div className="inner-main">
         {Title}
-        <img
-          src={data ? `../images/${data.icon}.svg` : defaultIcon} // Use template literals to dynamically import the icon
-          alt="sun"
-          style={{
-            visibility: city ? "visible" : "hidden",
-            opacity: city ? "1" : "0",
-          }}
-        />
+        {data && <IMAGES code={data.icon} />}
         <div
           className="today"
           style={{
