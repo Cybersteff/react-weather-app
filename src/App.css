@@ -10,8 +10,62 @@
   text-align: center;
 }
 
+.dark-mode .App {
+  background-color: #1e1e1e; /* Dark background color */
+  color: #fff; /* Light text color */
+}
+
+.dark-mode .App-header {
+  background-image: url("./images/dark-background_2.jpg");
+  background-color: #ffffff; /* Dark header background color */
+  color: #fff; /* Light header text color */
+}
+
+.dark-mode .weather-box-list {
+  background-color: #33333300; /* Dark list background color */
+  color: #fff; /* Light list text color */
+}
+
+.dark-mode .weather-box {
+  background-color: rgb(255 255 255 / 8%);
+  box-shadow: 1px 0px 8px silver;
+}
+
+.dark-mode .weather-box h1 {
+  color: #fff;
+}
+
+.dark-mode .weather-box span {
+  color: #fff;
+}
+
+.dark-mode-toggle {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 10px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.dark-mode button {
+  background-color: #333; /* Dark button background color */
+  color: #fff; /* Light button text color */
+}
+
+/* Add transition for mode transition animation */
+.dark-mode .App,
+.dark-mode .App-header,
+.dark-mode .weather-box-list,
+.dark-mode button {
+  transition: background-color 1s, color 1.2s; /* Adjust transition duration */
+}
+
 .App-header {
-  background-image: url('./images/background.jpg');
+  background-image: url("./images/background.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center bottom;

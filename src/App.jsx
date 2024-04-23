@@ -9,6 +9,7 @@ const App = () => {
   const [city, setCity] = useState(undefined);
   const [days, setDays] = useState(new Array(5));
   const [weatherBoxElements, setWeatherBoxElements] = useState([]);
+  const [darkMode, setDarkMode] = useState(false); // State for dark mode
 
   const updateState = (data) => {
     const city = data.city.name;
@@ -78,8 +79,17 @@ const App = () => {
     setWeatherBoxElements(WeatherBoxes);
   }, [days]);
 
+  // Toggle dark mode function
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+  };
+
   return (
-    <div className="App">
+    <div className={`App ${darkMode ? "dark-mode" : ""}`}>
+      {/* Dark mode toggle button */}
+      <button className="dark-mode-toggle" onClick={toggleDarkMode}>
+        {darkMode ? "Light Mode" : "Dark Mode"}
+      </button>
       <header className="App-header">
         <MainWeatherWindow data={days[0]} city={city}>
           <CityInput city={city} makeApiCall={makeApiCall} />
