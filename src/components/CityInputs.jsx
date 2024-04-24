@@ -22,7 +22,7 @@ const CityInput = (props) => {
   };
 
   const style = {
-    bottom: props.city ? "380px" : "-87px",
+    bottom: props.city ? "400px" : "-87px",
     width: "600px",
     display: "inline-block",
     padding: "10px 0px 10px 30px",
@@ -31,7 +31,7 @@ const CityInput = (props) => {
     borderRadius: "20px",
     outline: "none",
     fontSize: "20px",
-    transition: "all 0.5s ease-out",
+    transition: "all 0.7s ease-out",
   };
 
   return (
