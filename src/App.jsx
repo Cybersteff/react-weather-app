@@ -81,15 +81,27 @@ const App = () => {
 
   // Toggle dark mode function
   const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
+    setDarkMode((prevMode) => !prevMode);
   };
 
   return (
     <div className={`App ${darkMode ? "dark-mode" : ""}`}>
-      {/* Dark mode toggle button */}
-      <button className="dark-mode-toggle" onClick={toggleDarkMode}>
-        {darkMode ? "Light Mode" : "Dark Mode"}
-      </button>
+      {/* Dark mode slider toggle */}
+      <label className="dark-mode-toggle">
+        <input
+          type="checkbox"
+          checked={darkMode}
+          onChange={toggleDarkMode}
+          className="slider"
+        />
+        <span className="slider round">
+          {darkMode ? (
+            <i className="fas fa-moon"></i>
+          ) : (
+            <i className="fas fa-sun"></i>
+          )}
+        </span>
+      </label>
       <header className="App-header">
         <MainWeatherWindow data={days[0]} city={city}>
           <CityInput city={city} makeApiCall={makeApiCall} />

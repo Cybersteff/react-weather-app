@@ -1,3 +1,5 @@
+/* App.css */
+
 * {
   padding: 0;
   margin: 0;
@@ -39,18 +41,68 @@
   color: #fff;
 }
 
+/* Dark mode slider toggle */
 .dark-mode-toggle {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  padding: 10px;
-  background-color: #333;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+  top: 8px;
+  right: 8px;
+  display: inline-block;
+  width: 34px;
+  height: 17.5px;
 }
 
+.dark-mode-toggle input {
+  display: none;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  border-radius: 34px;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  top: 0.5px;
+  left: 0;
+  background-color: rgb(73, 73, 73);
+  border-radius: 50%;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #2196f3;
+}
+
+input:checked + .slider::before {
+  background-color: #fff;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196f3;
+}
+
+input:checked + .slider:before {
+  transform: translateX(16.5px);
+}
+
+/* Additional styles for appearance */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
 .dark-mode button {
   background-color: #333; /* Dark button background color */
   color: #fff; /* Light button text color */
