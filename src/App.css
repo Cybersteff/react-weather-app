@@ -10,6 +10,7 @@
 
 .App {
   text-align: center;
+  min-height: 1.3vh;
 }
 
 .dark-mode .App {
@@ -44,11 +45,11 @@
 /* Dark mode slider toggle */
 .dark-mode-toggle {
   position: absolute;
-  top: 8px;
-  right: 8px;
+  top: 24px;
+  right: 28px;
   display: inline-block;
-  width: 34px;
-  height: 17.5px;
+  width: 42px;
+  height: 22px;
 }
 
 .dark-mode-toggle input {
@@ -62,7 +63,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ccc;
+  background-color: #fdc419;
   border-radius: 34px;
   transition: 0.4s;
 }
@@ -70,11 +71,11 @@
 .slider:before {
   position: absolute;
   content: "";
-  height: 16px;
-  width: 16px;
-  top: 0.5px;
-  left: 0;
-  background-color: rgb(73, 73, 73);
+  height: 18px;
+  width: 18px;
+  top: 2px;
+  left: 2px;
+  background-color: #fff;
   border-radius: 50%;
   transition: 0.4s;
 }
@@ -83,16 +84,32 @@ input:checked + .slider {
   background-color: #2196f3;
 }
 
-input:checked + .slider::before {
-  background-color: #fff;
+.sun-icon svg {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  height: 16px;
+  width: 16px;
 }
 
-input:focus + .slider {
-  box-shadow: 0 0 1px #2196f3;
+.sun-icon svg path {
+  fill: #fff; /* Change the color for light mode */
+}
+
+.moon-icon svg {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  width: 26px;
+  height: 26px;
+}
+
+.moon-icon svg path {
+  fill: #ffffff; /* Change the color for dark mode */
 }
 
 input:checked + .slider:before {
-  transform: translateX(16.5px);
+  transform: translateX(20px);
 }
 
 /* Additional styles for appearance */
@@ -103,6 +120,7 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+
 .dark-mode button {
   background-color: #333; /* Dark button background color */
   color: #fff; /* Light button text color */
@@ -128,4 +146,13 @@ input:checked + .slider:before {
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+/* 3D tilting animation */
+.MainWeatherWindow {
+  transition: transform 0.3s ease-in-out;
+}
+
+.MainWeatherWindow:hover {
+  transform: rotateX(5deg) rotateY(5deg); /* Adjust rotation angles as needed */
 }
