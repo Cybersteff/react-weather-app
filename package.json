@@ -10,7 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "axios": "^1.6.8",
+    "axios": "^1.7.0",
     "metaweather": "^0.0.2",
     "node-fetch": "^3.3.2",
     "openmeteo": "^1.1.3",
